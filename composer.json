@@ -1,0 +1,38 @@
+{
+  "name": "insma/yii2-fluid-player",
+  "description": "Wrapper for fluid player to use it with Yii2 Framework.",
+  "keywords": [
+    "yii2",
+    "extension",
+    "video",
+    "video player",
+    "fluid player",
+    "web video player",
+    "online player",
+    "CDN"
+  ],
+  "type": "yii2-extension",
+  "license": "MIT",
+  "support": {
+    "issues": "https://github.com/insma/yii2-fluid-player/issues?state=open",
+    "wiki": "https://github.com/insma/yii2-fluid-player/wiki",
+    "source": "https://github.com/insma/yii2-fluid-player"
+  },
+  "authors": [
+    {
+      "name": "Insma Software",
+      "email": "m.klemarczyk+insma@live.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "insma\\player\\": "src/"
+    }
+  },
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.4.0",
+    "yiisoft/yii2": ">=2.0.11",
+    "fluid-player/fluid-player": "^2.4.2"
+  }
+}
