@@ -22,17 +22,22 @@ use insma\player\models\VideoSource;
 class FluidPlayer extends Widget
 {
     /**
+     * @var boolean
+     */
+    public $useCdn;
+
+    /**
      * @var VideoSource[]
      */
     public $sources;
 
     /**
-     * @var string
+     * @var array
      */
     public $videoOptions;
 
     /**
-     * @var string
+     * @var array
      */
     public $playerOptions;
 
@@ -75,7 +80,12 @@ class FluidPlayer extends Widget
      */
     protected function registerAssetBundle()
     {
-        FluidPlayerAsset::register($this->getView());
+        if ($this->useCdn === true) {
+            $this->getView()->registerCssFile('http://cdn.fluidplayer.com/2.4.2/fluidplayer.min.css', [], 'fluidPlayer-widget-css-cdn');
+            $this->getView()->registerJsFile('http://cdn.fluidplayer.com/2.4.2/fluidplayer.min.js', [], 'fluidPlayer-widget-js-cdn');
+        } else {
+            FluidPlayerAsset::register($this->getView());
+        }
     }
 
     protected function registerPlayerScript()

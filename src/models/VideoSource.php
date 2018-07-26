@@ -16,10 +16,29 @@ use yii\base\Model;
  */
 class VideoSource extends Model
 {
+    /**
+     * @var string
+     */
     public $source;
+
+    /**
+     * @var string
+     */
     public $title;
+
+    /**
+     * @var string
+     */
     public $type;
+
+    /**
+     * @var string
+     */
     public $quality;
+
+    /**
+     * @var array
+     */
     public $sourceOptions;
 
     public function rules()
