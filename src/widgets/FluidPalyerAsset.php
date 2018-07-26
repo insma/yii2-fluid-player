@@ -14,7 +14,7 @@ namespace insma\player\widgets;
  */
 class FluidPalyerAsset extends \yii\web\AssetBundle
 {
-    public $sourcePath = '@vendor/fluid-player/fluid-player';
+    public $sourcePath = '@vendor/insma/fluid-player';
 
     public function init()
     {

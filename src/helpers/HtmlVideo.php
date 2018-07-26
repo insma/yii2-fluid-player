@@ -47,8 +47,4 @@ class FluidPlayerWidget extends \yii\helpers\BaseHtml
     {
         return "</video>";
     }
-
-    <script type="text/javascript">
-    fluidPlayer('my-video');
- </script>
 }

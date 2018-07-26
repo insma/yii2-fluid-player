@@ -31,8 +31,7 @@
   },
   "minimum-stability": "dev",
   "require": {
-    "php": ">=5.4.0",
     "yiisoft/yii2": ">=2.0.11",
-    "fluid-player/fluid-player": "^2.4.2"
+    "insma/fluid-player": "^2.4.2"
   }
 }
