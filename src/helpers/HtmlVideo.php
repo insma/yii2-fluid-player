@@ -16,29 +16,17 @@ use yii\helpers\Url;
  * @author Maciej Klemarczyk <m.klemarczyk+dev@live.com>
  * @since 1.0
  */
-class FluidPlayerWidget extends \yii\helpers\BaseHtml
+class HtmlVideo extends \yii\helpers\BaseHtml
 {
-    public static function beginForm($id, $options = [])
+    public static function beginVideo($id, $options = [])
     {
         $options['id'] = $id;
         return static::beginTag('video', $options);
     }
 
-    public static function source($src, $type = 'SD', $options = [])
+    public static function source($src, $options = [])
     {
         $options['src'] = Url::to($src);
-
-        if (isset($options['srcset']) && is_array($options['srcset'])) {
-            $srcset = [];
-            foreach ($options['srcset'] as $descriptor => $url) {
-                $srcset[] = Url::to($url) . ' ' . $descriptor;
-            }
-            $options['srcset'] = implode(',', $srcset);
-        }
-
-        if (!isset($options['alt'])) {
-            $options['alt'] = '';
-        }
 
         return static::tag('source', '', $options);
     }

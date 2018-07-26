@@ -20,6 +20,7 @@ class VideoSource extends Model
     public $title;
     public $type;
     public $quality;
+    public $sourceOptions;
 
     public function rules()
     {

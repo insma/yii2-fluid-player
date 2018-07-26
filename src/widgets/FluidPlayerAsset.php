@@ -12,7 +12,7 @@ namespace insma\player\widgets;
  * @author Maciej Klemarczyk <m.klemarczyk+dev@live.com>
  * @since 1.0
  */
-class FluidPalyerAsset extends \yii\web\AssetBundle
+class FluidPlayerAsset extends \yii\web\AssetBundle
 {
     public $sourcePath = '@vendor/insma/fluid-player';
 

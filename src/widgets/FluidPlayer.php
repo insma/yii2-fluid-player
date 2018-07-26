@@ -9,6 +9,7 @@
 namespace insma\player\widgets;
 
 use yii\base\Widget;
+use yii\helpers\Json;
 use yii\web\View;
 
 use insma\player\helpers\HtmlVideo;
@@ -30,18 +31,25 @@ class FluidPlayer extends Widget
      */
     public $videoOptions;
 
+    /**
+     * @var string
+     */
+    public $playerOptions;
+
     public function init()
     {
         parent::init();
-        $this->registerAssetBundle()
+        $this->registerAssetBundle();
         $this->registerPlayerScript();
     }
 
     public function run()
     {
-        $htmlView = HtmlVideo::beginVideo($this->id, $videoOptions);
-        foreach ($sources as $key => $value) {
-            $htmlView .= self::prepareSourceTag($value);
+        $htmlView = HtmlVideo::beginVideo($this->id, $this->videoOptions);
+        foreach ($this->sources as $key => $value) {
+            if ($value instanceof VideoSource && $value->validate()) {
+                $htmlView .= self::prepareSourceTag($value);
+            }
         }
         $htmlView .= HtmlVideo::endVideo();
         return $htmlView;
@@ -51,12 +59,15 @@ class FluidPlayer extends Widget
     {
         $options = [];
 
-        $options['source'] = $source->source;
+        if (is_array($source->sourceOptions)) {
+            $options = $source->sourceOptions;
+        }
+
         $options['title'] = $source->title;
         $options['type'] = $source->type;
         $options['quality'] = $source->quality;
 
-        return HtmlVideo::source($src, $options);
+        return HtmlVideo::source($source->source, $options);
     }
 
     /**
@@ -64,12 +75,13 @@ class FluidPlayer extends Widget
      */
     protected function registerAssetBundle()
     {
-        FluidPalyerAsset::register($this->getView());
+        FluidPlayerAsset::register($this->getView());
     }
 
     protected function registerPlayerScript()
     {
-        $jsScript = '';
+        $options = Json::encode($this->playerOptions);
+        $jsScript = 'fluidPlayer("' . $this->id . '",' . $options . ');';
         $this->getView()->registerJs($jsScript, View::POS_READY, $this->id);
     }
 }
