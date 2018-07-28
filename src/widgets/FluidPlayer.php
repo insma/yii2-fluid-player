@@ -51,11 +51,14 @@ class FluidPlayer extends Widget
     public function run()
     {
         $htmlView = HtmlVideo::beginVideo($this->id, $this->videoOptions);
+        $sources = [];
         foreach ($this->sources as $key => $value) {
             if ($value instanceof VideoSource && $value->validate()) {
-                $htmlView .= self::prepareSourceTag($value);
+                $sources[$value->qualityOrder . '_' . $key] = self::prepareSourceTag($value);
             }
         }
+        krsort($sources, SORT_NATURAL);
+        $htmlView .= implode($sources);
         $htmlView .= HtmlVideo::endVideo();
         return $htmlView;
     }
@@ -71,6 +74,10 @@ class FluidPlayer extends Widget
         $options['title'] = $source->title;
         $options['type'] = $source->type;
         $options['quality'] = $source->quality;
+
+        if ($source->isHdReady) {
+            $options['data-fluid-hd'] = 'true';
+        }
 
         return HtmlVideo::source($source->source, $options);
     }
