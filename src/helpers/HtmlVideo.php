@@ -21,7 +21,6 @@ class HtmlVideo extends \yii\helpers\BaseHtml
     public static function beginVideo($id, $options = [])
     {
         $options['id'] = $id;
-
         return static::beginTag('video', $options);
     }
 
